@@ -2,24 +2,27 @@
 Parse pmml files and convert it to sklearn kmeans models.
 
 ### Usage
-```python
+```python3
 >>> from pmml2sklearn import pmml2sklearn
 
 >>> parsed_model = pmml2sklearn("your_pmml_file.pmml")
 
 >>> # Cluster centers with cluster names parsed from pmml file:
 >>> print(parsed_model.clusters)
-
+```
+```
         name              center
 0  cluster_0  43.641748692028024
 1  cluster_1   29.32112701093236
 2  cluster_2  59.892706731733405
 3  cluster_3   9.410157007171932
 4  cluster_4  117.94557522123894
-
+```
+```python3
 >>> # Sklearn kmeans model generated with cluster centers:
 >>> print(parsed_model.kmeans)
-
+```
+```
 KMeans(algorithm='auto', copy_x=True,
     init=array([[ 43.64175],
        [ 29.32113],
