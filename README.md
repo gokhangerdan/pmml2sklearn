@@ -2,7 +2,7 @@
 Parse pmml files and convert it to sklearn kmeans models.
 
 ### Usage
-```
+```python
 >>> from pmml2sklearn import pmml2sklearn
 
 >>> parsed_model = pmml2sklearn("your_pmml_file.pmml")
