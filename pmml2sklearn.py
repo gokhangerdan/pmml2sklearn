@@ -11,17 +11,18 @@ class pmml2sklearn:
         a = dict(xmltodict.parse(xml_file))
 
         clusters = a["PMML"]["ClusteringModel"]["Cluster"]
-
-        x = np.array([[eval(i["Array"]["#text"])] for i in clusters])
-
-        self.clusters = pd.DataFrame({
+        fields = a["PMML"]["ClusteringModel"]["ClusteringField"]
+        x = np.array([[eval(x) for x in i["Array"]["#text"].split(" ")] for i in clusters])
+        a = {
             "name": [x["@name"] for x in clusters],
-            "center": [x["Array"]["#text"] for x in clusters],
-        })
+        }
+        for n, i in enumerate(fields):
+            a[i["@field"]] = [eval(i["Array"]["#text"].split(" ")[n]) for i in clusters]
+        self.clusters = pd.DataFrame(a)
 
         self.kmeans = KMeans(
             n_clusters=len(x),
-            init=x, 
+            init=x,
             n_init=1,
             random_state=1
         )
